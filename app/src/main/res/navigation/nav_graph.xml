@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainMenu">
+
+    <fragment
+        android:id="@+id/firstLevel"
+        android:name="com.example.reflex_projekt.FirstLevel"
+        android:label="fragment_first_level"
+        tools:layout="@layout/fragment_first_level" >
+        <action
+            android:id="@+id/action_firstLevel_to_mainMenu"
+            app:destination="@id/mainMenu" />
+    </fragment>
+    <fragment
+        android:id="@+id/secondLevel"
+        android:name="com.example.reflex_projekt.SecondLevel"
+        android:label="fragment_second_level"
+        tools:layout="@layout/fragment_second_level" >
+        <action
+            android:id="@+id/action_secondLevel_to_mainMenu"
+            app:destination="@id/mainMenu" />
+    </fragment>
+    <fragment
+        android:id="@+id/thirdLevel"
+        android:name="com.example.reflex_projekt.ThirdLevel"
+        android:label="fragment_third_level"
+        tools:layout="@layout/fragment_third_level" >
+        <action
+            android:id="@+id/action_thirdLevel_to_mainMenu"
+            app:destination="@id/mainMenu" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainMenu"
+        android:name="com.example.reflex_projekt.MainMenu"
+        android:label="fragment_main_menu"
+        tools:layout="@layout/fragment_main_menu" >
+        <action
+            android:id="@+id/action_mainMenu_to_firstLevel"
+            app:destination="@id/firstLevel" />
+        <action
+            android:id="@+id/action_mainMenu_to_secondLevel"
+            app:destination="@id/secondLevel" />
+        <action
+            android:id="@+id/action_mainMenu_to_thirdLevel"
+            app:destination="@id/thirdLevel" />
+    </fragment>
+</navigation>

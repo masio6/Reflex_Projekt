@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Reflex_Projekt</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="logo_of_game">logo of game</string>
+    <string name="level_1">LEVEL 1</string>
+    <string name="level_2">Level 2</string>
+    <string name="level_3">Level 3</string>
+    <string name="back">WRÓĆ</string>
+    <string name="start">START</string>
+    <string name="your_record">Twój rekord: \n</string>
+    <string name="area_2x2">Plansza \n 2x2</string>
+    <string name="area_4x4">Plansza \n4x4</string>
+    <string name="area_3x3">Plansza \n3x3</string>
+    <string name="punkty">Punkty:</string>
+    <string name="czas">Czas:</string>
+    <string name="_4_50">4/50</string>
+    <string name="level_string">Wybierz poziom...</string>
+    <string name="delete_data">USUŃ DANE</string>
+</resources>
