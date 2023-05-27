@@ -46,5 +46,17 @@
         <action
             android:id="@+id/action_mainMenu_to_thirdLevel"
             app:destination="@id/thirdLevel" />
+        <action
+            android:id="@+id/action_mainMenu_to_top10list"
+            app:destination="@id/top10list" />
+    </fragment>
+    <fragment
+        android:id="@+id/top10list"
+        android:name="com.example.reflex_projekt.Top10list"
+        android:label="fragment_top10list"
+        tools:layout="@layout/fragment_top10list" >
+        <action
+            android:id="@+id/action_top10list_to_mainMenu"
+            app:destination="@id/mainMenu" />
     </fragment>
 </navigation>

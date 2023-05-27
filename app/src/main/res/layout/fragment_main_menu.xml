@@ -11,10 +11,10 @@
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:contentDescription="@string/logo_of_game"
         android:scaleX="0.6"
         android:scaleY="0.6"
-        android:layout_marginTop="20dp"
         android:src="@drawable/reflex_game_logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,12 +24,12 @@
         android:id="@+id/levelChooseText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="sans-serif-smallcaps"
         android:text="@string/level_string"
         android:textColor="@color/white"
         android:textSize="25sp"
         android:textStyle="bold"
-        android:fontFamily="sans-serif-smallcaps"
-        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toTopOf="@+id/firstLevelButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -37,7 +37,7 @@
     <Button
         android:id="@+id/firstLevelButton"
         android:layout_width="200dp"
-        android:layout_height="75dp"
+        android:layout_height="60dp"
         android:backgroundTint="#35A306"
         android:fontFamily="sans-serif-smallcaps"
         android:text="@string/level_1"
@@ -51,7 +51,7 @@
     <Button
         android:id="@+id/secondLevelButton"
         android:layout_width="200dp"
-        android:layout_height="75dp"
+        android:layout_height="60dp"
         android:backgroundTint="#D69C08"
         android:fontFamily="sans-serif-smallcaps"
         android:text="@string/level_2"
@@ -62,12 +62,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.35"/>
+        app:layout_constraintVertical_bias="0.35" />
 
     <Button
         android:id="@+id/thirdLevelButton"
         android:layout_width="200dp"
-        android:layout_height="75dp"
+        android:layout_height="60dp"
         android:backgroundTint="#EC2D1B"
         android:fontFamily="sans-serif-smallcaps"
         android:text="@string/level_3"
@@ -78,10 +78,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/secondLevelButton" />
 
+
+    <Button
+        android:id="@+id/top10button"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:backgroundTint="#EDC967"
+        android:fontFamily="sans-serif-smallcaps"
+        android:drawableStart="@drawable/trophy"
+        android:text="top10"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/thirdLevelButton" />
+
     <Button
         android:id="@+id/deleteData"
         android:layout_width="200dp"
-        android:layout_height="75dp"
+        android:layout_height="60dp"
         android:backgroundTint="#323131"
         android:fontFamily="sans-serif-smallcaps"
         android:text="@string/delete_data"
@@ -90,6 +106,6 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/thirdLevelButton" />
+        app:layout_constraintTop_toBottomOf="@+id/top10button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

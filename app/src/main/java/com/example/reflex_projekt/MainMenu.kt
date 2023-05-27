@@ -74,6 +74,11 @@ class MainMenu : Fragment() {
             Navigation.findNavController(view).navigate(R.id.action_mainMenu_to_thirdLevel)
         }
 
+
+        view.findViewById<Button>(R.id.top10button).setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_mainMenu_to_top10list)
+        }
+
         view.findViewById<Button>(R.id.deleteData).setOnClickListener {
             deleteData()
         }

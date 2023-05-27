@@ -2,6 +2,8 @@ package com.example.reflex_projekt
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.app.Dialog
+import android.content.Context
 import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -15,6 +17,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.navigation.Navigation
@@ -22,7 +25,10 @@ import com.example.reflex_projekt.database.AppDatabase
 import com.example.reflex_projekt.database.Stats2x2
 import com.example.reflex_projekt.database.Stats3x3
 import com.example.reflex_projekt.database.Stats4x4
+import com.google.android.material.button.MaterialButton
+import com.google.firebase.database.*
 import kotlinx.coroutines.*
+import java.text.DecimalFormat
 import kotlin.random.Random
 
 // TODO: Rename parameter arguments, choose names that match
@@ -39,13 +45,13 @@ class SecondLevel : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
+    lateinit var arrayList:ArrayList<Player>;
     private var refreshNumber = 50
     private var refreshCounter = 0
     private var points = 0
     private var maxTimeInMilis = 10*60*1000L
     private var timeInMilis = 0L
-
+    private lateinit var dbref: DatabaseReference
     private lateinit var timer: CountDownTimer
 
     private var listOfSquares = mutableListOf<View>()
@@ -86,7 +92,7 @@ class SecondLevel : Fragment() {
         val view = inflater.inflate(R.layout.fragment_second_level, container, false)
 
         appDatabase = AppDatabase.getDatabase(requireContext())
-
+        arrayList= arrayListOf<Player>()
         pointsField = view.findViewById(R.id.pointsField)
         timeField = view.findViewById(R.id.timeField)
         refreshNumberField = view.findViewById(R.id.refreshNumber)
@@ -105,7 +111,7 @@ class SecondLevel : Fragment() {
             }
 
             override fun onFinish() {
-                endGame()
+                endGame(view.context)
             }
         }
 
@@ -155,7 +161,7 @@ class SecondLevel : Fragment() {
                 refreshArea()
 
                 if(refreshCounter - 1 == refreshNumber) {
-                    endGame()
+                    endGame(view.context)
                 }
             }
         }
@@ -278,7 +284,7 @@ class SecondLevel : Fragment() {
         listOfSquares[Random.nextInt(0, listOfSquares.size)].setBackgroundColor(Color.parseColor(goldColor))
     }
 
-    fun endGame() {
+    fun endGame(con:Context) {
         listOfSquares.forEach {
             it.setBackgroundColor(Color.WHITE)
             it.isEnabled = false
@@ -298,7 +304,21 @@ class SecondLevel : Fragment() {
         timeField.isVisible = false
         refreshNumberField.isVisible = false
 
-        (activity?.let {
+        getGamedata()
+
+
+        var   times:Float =(timeInMilis).toFloat()/1000
+        var t=1
+        if(arrayList.size==10)
+        {
+            if(arrayList[9].time!!<times)
+                t=0
+        }
+
+        if(points==refreshNumber && t==1)
+        { showDialog(con,timeInMilis)}
+        else
+        {   (activity?.let {
             val builder =
                 AlertDialog.Builder(it).setMessage("\nTwój wynik: \nCzas: ${timeFormatConvert(timeInMilis)} \nPunkty: $points/$refreshNumber \n\nGratulacje!")
             builder.apply {
@@ -308,11 +328,106 @@ class SecondLevel : Fragment() {
                     })
             }
             builder.create()
-        } ?: throw IllegalStateException("Activity cannot be null")).show()
-
+        } ?: throw IllegalStateException("Activity cannot be null")).show()}
         refreshCounter = 0
         timeInMilis = 0
         points = 0
+    }
+
+    private fun showDialog(
+        con: Context,
+        long: Long
+
+
+    ) {
+        val dialog = Dialog(con)
+
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.get_ontop10_view)
+        val playername=dialog.findViewById<EditText>(R.id.editTextTextPersonName)
+        val wynik=dialog.findViewById<TextView>(R.id.wyniktext)
+
+
+        wynik.setText("\nTwój wynik: \nCzas: ${timeFormatConvert(timeInMilis)} \nPunkty: $points/$refreshNumber \n\nGratulacje!")
+
+
+
+
+        val savebutton=dialog.findViewById<MaterialButton>(R.id.savebut)
+        savebutton.setOnClickListener(){
+
+
+
+
+            dbref= FirebaseDatabase
+                .getInstance("https://top10-clickers-list-default-rtdb.firebaseio.com/")
+                .getReference("lists")
+                .child("2")
+            var database= FirebaseDatabase.getInstance().getReference();
+            var id=database.push().key;
+
+
+
+
+            var   times:Float =(long).toFloat()/1000
+
+
+
+            var df = DecimalFormat("#.##")
+            df.maximumFractionDigits = 2
+            var roundedNumber = df.format(times)
+
+            var rounded = roundedNumber.toFloat()
+            if(arrayList.size==10 )
+                id=arrayList[9].id
+
+
+            var player=Player(id,playername.text.toString(), rounded)
+            dbref.child(player.id.toString()).setValue(player)
+            dialog.dismiss()
+
+        }
+        dialog.show()
+
+    }
+    private fun getGamedata() {
+        arrayList.clear()
+
+        dbref= FirebaseDatabase
+            .getInstance("https://top10-clickers-list-default-rtdb.firebaseio.com/")
+            .getReference("lists")
+            .child("2")
+
+        dbref.addValueEventListener(object : ValueEventListener {
+
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                arrayList.clear()
+                if(snapshot.exists()){
+                    for (gamesnapshot in snapshot.children){
+                        val game=gamesnapshot.getValue(Player::class.java)
+
+
+                        arrayList.add(game!!)
+
+
+
+
+                    }
+                    sortPlayersByTime(arrayList)
+
+
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })}
+
+
+    fun sortPlayersByTime(players: ArrayList<Player>) {
+        players.sortBy { it.time }
     }
     companion object {
         /**
