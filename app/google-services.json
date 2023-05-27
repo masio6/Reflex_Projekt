@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "231738927921",
+    "firebase_url": "https://top10-clickers-list-default-rtdb.firebaseio.com",
+    "project_id": "top10-clickers-list",
+    "storage_bucket": "top10-clickers-list.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:231738927921:android:7a1c2ffe6cef9654049e10",
+        "android_client_info": {
+          "package_name": "com.example.reflex_projekt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "231738927921-hsc7a703qrbh2vtj1vctmdu080u00qsq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD00hM9oLuhar-4luLLVkTKWG-Lakr91qg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "231738927921-hsc7a703qrbh2vtj1vctmdu080u00qsq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
