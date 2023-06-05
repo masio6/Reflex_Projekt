@@ -366,6 +366,7 @@ if(points==refreshNumber && t==1){
 
 
 
+    @SuppressLint("SuspiciousIndentation")
     private fun showDialog(
         con: Context,
         long: Long
