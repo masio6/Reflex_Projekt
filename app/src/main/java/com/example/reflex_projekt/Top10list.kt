@@ -1,5 +1,6 @@
 package com.example.reflex_projekt
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -34,7 +35,7 @@ class Top10list : Fragment() {
     private var param2: String? = null
     lateinit var rv: RecyclerView;
     lateinit var arrayList:ArrayList<Player>;
-    lateinit var myadapter:MyAdapter;
+
     lateinit var dbref: DatabaseReference
 
     private var ClickedColor: Int = Color.parseColor("#EDC967")
@@ -127,6 +128,7 @@ getGamedata()
         dbref.addValueEventListener(object : ValueEventListener {
 
 
+            @SuppressLint("SuspiciousIndentation")
             override fun onDataChange(snapshot: DataSnapshot) {
                arrayList.clear()
                 if(snapshot.exists()){
