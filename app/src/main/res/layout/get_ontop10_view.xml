@@ -2,8 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="420dp"
-    android:layout_height="800dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@drawable/gradient_1">
 
 
@@ -25,6 +25,7 @@
         android:layout_width="287dp"
         android:layout_height="123dp"
         android:layout_marginTop="8dp"
+        android:textAlignment="center"
         android:text="Dostałeś się na listę top10 najlepszych graczy podaj nazwę pod jaką chcesz być zapisany:"
         android:textColor="@color/white"
         android:textSize="25dp"
@@ -39,7 +40,8 @@
         android:layout_height="80dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:hint="Nick"
+        android:textColorHint="#B3FFFFFF"
         android:textColor="@color/white"
         android:textSize="30dp"
         app:layout_constraintEnd_toEndOf="@+id/textView6"
@@ -63,8 +65,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/savebut"
-
-        android:layout_width="220dp"
+        android:layout_width="100dp"
         android:layout_height="70dp"
         android:layout_marginBottom="72dp"
         android:autoSizeMinTextSize="30dp"
@@ -78,10 +79,10 @@
 
 
         app:layout_constraintEnd_toEndOf="@+id/textView6"
-        app:layout_constraintHorizontal_bias="0.375"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/textView6"
         app:layout_constraintTop_toBottomOf="@+id/wyniktext"
-        app:layout_constraintVertical_bias="0.309"
+        app:layout_constraintVertical_bias="0.3"
         app:strokeColor="@color/white"
         app:strokeWidth="3dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

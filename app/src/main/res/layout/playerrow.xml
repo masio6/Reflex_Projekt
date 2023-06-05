@@ -6,8 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="65dp"
-android:backgroundTint="#10797A"
-
+    android:backgroundTint="#002D5353"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,21 +18,21 @@ android:backgroundTint="#10797A"
         <TextView
             android:id="@+id/position"
 
-            android:layout_width="86dp"
-            android:layout_height="75dp"
-            android:gravity="center_vertical"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
             android:text="1"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="30dp"
+            android:textSize="25dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/playername"
-            android:layout_width="255dp"
-            android:layout_height="66dp"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
             android:background="@drawable/custom_row"
             android:backgroundTint="#EDC967"
             android:gravity="center_vertical"
@@ -42,22 +41,21 @@ android:backgroundTint="#10797A"
             android:textColor="@color/white"
             android:textSize="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.41"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/time"
+            app:layout_constraintStart_toEndOf="@+id/position"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/time"
-            android:layout_width="89dp"
+            android:layout_width="75dp"
             android:layout_height="42dp"
-            android:gravity="center_vertical"
+            android:textAlignment="center"
+            android:gravity="center"
             android:text="20.58"
             android:textColor="@color/white"
-            android:textSize="30dp"
+            android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/playername"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
