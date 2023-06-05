@@ -335,6 +335,7 @@ class FirstLevel : Fragment() {
         timeInMilis = 0
         points = 0
     }
+    @SuppressLint("SuspiciousIndentation")
     private fun showDialog(
         con: Context,
         long: Long
@@ -376,7 +377,9 @@ class FirstLevel : Fragment() {
 
             var df = DecimalFormat("#.##")
             df.maximumFractionDigits = 2
+
             var roundedNumber = df.format(times)
+            roundedNumber = roundedNumber.replace(',', '.')
 
             var rounded = roundedNumber.toFloat()
      if(arrayList.size==10 )
