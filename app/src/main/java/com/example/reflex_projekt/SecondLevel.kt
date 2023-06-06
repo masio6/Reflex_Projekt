@@ -45,6 +45,9 @@ class SecondLevel : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    private var playing = false
+
     lateinit var arrayList:ArrayList<Player>;
     private var refreshNumber = 50
     private var refreshCounter = 0
@@ -139,8 +142,25 @@ class SecondLevel : Fragment() {
         refreshNumberField.isVisible = false
 
         btnBack.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_secondLevel_to_mainMenu)
-        }
+            if (playing) {
+                (activity?.let {
+                    val builder =
+                        AlertDialog.Builder(it).setMessage("Na pewno chcesz wyjść podczas trwającej rozgrywki?")
+                    builder.apply {
+                        setPositiveButton("TAK",
+                            DialogInterface.OnClickListener { dialog, id ->
+                                Navigation.findNavController(view).navigate(R.id.action_secondLevel_to_mainMenu)
+                            })
+                        setNegativeButton("NIE",
+                            DialogInterface.OnClickListener { dialog, id ->
+                                //
+                            })
+                    }
+                    builder.create()
+                } ?: throw IllegalStateException("Activity cannot be null")).show()
+            } else {
+                Navigation.findNavController(view).navigate(R.id.action_secondLevel_to_mainMenu)
+            }        }
 
         btnStart.setOnClickListener {
             startGame()
@@ -253,6 +273,8 @@ class SecondLevel : Fragment() {
     }
 
     fun startGame() {
+        playing = true
+
         refreshArea()
 
         timer.start()
@@ -261,7 +283,6 @@ class SecondLevel : Fragment() {
             it.isEnabled = true
         }
 
-        btnBack.isVisible = false
         btnStart.isVisible = false
         nameOfLevel.isVisible = false
 
@@ -285,6 +306,8 @@ class SecondLevel : Fragment() {
     }
 
     fun endGame(con:Context) {
+        playing = false
+
         listOfSquares.forEach {
             it.setBackgroundColor(Color.WHITE)
             it.isEnabled = false

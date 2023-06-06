@@ -46,6 +46,8 @@ class FirstLevel : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private var playing = false
+
     private var refreshNumber = 50
     private var refreshCounter = 0
     private var points = 0
@@ -139,7 +141,25 @@ class FirstLevel : Fragment() {
         refreshNumberField.isVisible = false
 
         btnBack.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_firstLevel_to_mainMenu)
+            if (playing) {
+                (activity?.let {
+                    val builder =
+                        AlertDialog.Builder(it).setMessage("Na pewno chcesz wyjść podczas trwającej rozgrywki?")
+                    builder.apply {
+                        setPositiveButton("TAK",
+                            DialogInterface.OnClickListener { dialog, id ->
+                                Navigation.findNavController(view).navigate(R.id.action_firstLevel_to_mainMenu)
+                            })
+                        setNegativeButton("NIE",
+                            DialogInterface.OnClickListener { dialog, id ->
+                                //
+                            })
+                    }
+                    builder.create()
+                } ?: throw IllegalStateException("Activity cannot be null")).show()
+            } else {
+                Navigation.findNavController(view).navigate(R.id.action_firstLevel_to_mainMenu)
+            }
         }
 
         btnStart.setOnClickListener {
@@ -254,6 +274,8 @@ class FirstLevel : Fragment() {
     }
 
     fun startGame() {
+        playing = true
+
         refreshArea()
 
         timer.start()
@@ -262,7 +284,6 @@ class FirstLevel : Fragment() {
             it.isEnabled = true
         }
 
-        btnBack.isVisible = false
         btnStart.isVisible = false
         nameOfLevel.isVisible = false
 
@@ -286,6 +307,8 @@ class FirstLevel : Fragment() {
     }
 
     fun endGame(con:Context) {
+        playing = false
+
         listOfSquares.forEach {
             it.setBackgroundColor(Color.WHITE)
             it.isEnabled = false
